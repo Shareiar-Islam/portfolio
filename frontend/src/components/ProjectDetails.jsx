@@ -3,6 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ExternalLink, Github, ArrowLeft } from 'lucide-react';
 import { getFileUrl } from '../helpers/fileHelpers';
 import ModelDescription from "./ModelDescription";
+import SEOHead from './SEOHead';
+
+const stripHtml = (html) => {
+  if (!html) return '';
+  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160);
+};
 
 const ProjectDetails = ({ projects }) => {
   const { id } = useParams();
@@ -26,7 +32,19 @@ const ProjectDetails = ({ projects }) => {
     );
   }
 
+  const projectDescription = stripHtml(project.description);
+  const projectImage = getFileUrl(project.image);
+  const projectUrl = `https://shareiarislam.vercel.app/projects/${project._id}`;
+
   return (
+    <>
+    <SEOHead
+      title={project.title}
+      description={projectDescription}
+      image={projectImage}
+      url={projectUrl}
+      type="article"
+    />
     <section className="py-20 px-6">
       <div className="container mx-auto max-w-4xl">
         <button
@@ -107,6 +125,7 @@ const ProjectDetails = ({ projects }) => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
