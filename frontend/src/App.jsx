@@ -12,6 +12,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import MouseFollower from './components/MouseFollower';
 import BackgroundParticles from './components/BackgroundParticles';
+import SEOHead from './components/SEOHead';
 
 const App = () => {
   const [visitors, setVisitors] = useState(0);
@@ -180,6 +181,7 @@ const App = () => {
               path="*"
               element={
                 <>
+                  <SEOHead />
                   <Hero id='hero' isVisible={isVisible} scrollToSection={scrollToSection} about={about} />
                   <About id='about' isVisible={isVisible} data={about} />
                   <Experience id='experience' isVisible={isVisible} experiences={experiences} />
